@@ -18,7 +18,7 @@
 //Emanuel Fonseca
 //Cameron Jackson
 //Erick Cabanban
-
+//Bradford Mcdaniel
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,7 +33,7 @@ int exercise(void);
 void convertToUpper(char *sPtr);
 void write(void);
 void switcch(void);
-
+void swap (int *x, int *y );
 
 
 
@@ -1513,7 +1513,9 @@ int main(void)
 			{
 					while(choice != 99)
 					{
-					
+					        
+						char string[1000];
+						FILE *f;
 						int choices;
 						int battlecommands;
 						int bossBattle,attackDamage,bossAttackdamage ,BossDamlower=100 ,BossDamnupper=400; //boss range for damage is higher than the kids defend command will have one save after that only damage reduction will be 25%
@@ -1527,7 +1529,7 @@ int main(void)
 
 								{	
 								puts("You encounter a demogorgon, the kids from stranger things appear to help you fight including eleven");
-								puts("battle begins \nmenu press the number to use the command example 1 to fight./n \nfight \ndefend \nitem \nrun");
+								puts("Battle begins \nmenu press the number to use the command example 1 to fight./n \nfight \ndefend \nitem \nrun");
 									scanf("%d",&battlecommands);
 									while(battlecommands!=5&&demogorgonHP>0&&partyHP>0)
 									{
@@ -1537,7 +1539,7 @@ int main(void)
 											scanf("%d",&bossBattle);
 												if(bossBattle==1)
 												{
-													puts("mike and the other kids attack");
+													puts("Mike and the other kids attack");
 													attackDamage= 1+(rand() %25);
 													puts("Demogorgon roars and counter attacks");
 													bossAttackdamage=1+(rand()+BossDamlower) %(BossDamnupper+1);
@@ -1551,13 +1553,14 @@ int main(void)
 														puts("Eleven attacks!");
 															attackDamage= 1+(rand() +1000) %(4000);
 															if(attackDamage>3000){
-														puts("demogorgon is pinned against the wall and can't attack!");
+														puts("Demogorgon is pinned against the wall and can't attack!");
 													demogorgonHP-=attackDamage;
 														printf("boss hp =%d   , party hp =%d \n",demogorgonHP,partyHP);
 													}
 												else
 												{
-													puts("demogorgon is stunned but swipes at eleven");
+													puts(" Demogorgon is stunned but swipes at eleven");
+	                                                                                                                              
 													bossAttackdamage=1+(rand()+BossDamlower) %(BossDamnupper+1);
 													partyHP-=attackDamage;
 													partyHP+=50;//attack is weaker vs eleven so they don't lose as much
@@ -1585,7 +1588,8 @@ int main(void)
 										{
 												puts("Eleven uses eggo waffles increases attack damage! note using this command again will not stack attack damage");
 												puts("\nmenu press the number to use the command example 1 to fight./n \nfight \ndefend \nitem \nrun");
-												scanf("%d",&battlecommands);
+												
+											scanf("%d",&battlecommands);
 										}
 										if(battlecommands==4)
 										{
@@ -1607,22 +1611,57 @@ int main(void)
 						}// end of choice 1 if
 						case 2:
 						{
-							puts("you move into room with a lake");
-							break;
+								
+							puts("You find a room with a large book in the center it ask for you to sign your name please type your name in to gain the rights to room13");
+							f=fopen("book.txt", "w");
+   							puts("Cartman from SouthPark enters the room... Cartman: its you Sir Douchebag I shall write your name in the book of truth");
+   							fprintf(f," By the powers vested in Eric Cartman first of his name, Grand wizard of Kupa Keep room 13 is yours Sir Douchebag");
+    							fclose(f);
+    							break;
 						}
 
 
 						case 3:
 						{
-							puts("room fills with water no escape game over");
+							puts("This room has one sign that reads Loud people are rude we will make you talk in a inside voice in this room");
+							puts("you figure out you need to yell to leave this room you scream (type anything in all caps)");
+							scanf("%c",string);
+							gets(string);
+ 							printf("Mystic wind blows as your voice lowers and repeats what you said but in a softer tone %s\n", strlwr(string));
+   							printf("%c",string);
+	   						puts("Maybe is if I speak in a normal voice it will reverse it!");
+							scanf("%c",string);
+							gets(string);
+							printf("Your Voice booms and you hear a crash nearby there is now a way out! %s",strupr(string));
+							printf("%c",string);
 							break;
 						}
 						case 4:
 						{
-							puts(" you find the sword of truth");
+								puts(" you find a room with three jars and a old man he puts the key to the room in one and begins to swap them, Choose the jar the key is and you can leave ");
+								puts("there are three swaps it seems the key started in jar one farthest to the left type which jar you think its in 1 for the left  for the middle jar 3 for the right jar");
+								jar1=7;
+								jar2=0;
+								jar3=0;
+								swap( &jar1,  &jar2 );
+								swap (&jar2, &jar3);
+								printf("%d" "there is a number in here this is jar2  it has the key right now one more swap/n",jar2);
+								swap(&jar3, &jar1);
+								scanf("%d",pick);
+								if(pick==1)
+								{
+									puts("puts you found the key lets get out of here!");
+									return 0;
+								}
+						else
+						{
+		
+							puts("the old man laughs has he reveals a empty jar you hear a low growl you are eaten by a large dargon game over");
+							return 0;
+						}		
 							break;
-						}
-						default:
+							
+							default:
 						{
 								puts("wrong button or impossible direction try again");
 								break;
@@ -2858,4 +2897,10 @@ void switcch(void)
 	}
 	puts("Feeding the beast only fueled his rage!");
 }
+void swap (int *x, int *y )
+{
 
+   	 int temp = *x; 
+	*x = *y;
+	*y = temp;
+}
