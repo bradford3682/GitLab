@@ -1916,7 +1916,7 @@ int main(void)
 					{
 						char string[1000];
 						FILE *f;
-						int i;
+						int i,pick;
 						int choices,jar1=7,jar2=0,jar3=0;
 						int battlecommands;
 						int bossBattle,attackDamage,bossAttackdamage ,BossDamlower=100 ,BossDamnupper=400; //boss range for damage is higher than the kids defend command will have one save after that only damage reduction will be 25%
